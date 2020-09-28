@@ -1,0 +1,157 @@
+<mat-toolbar>Gerenciamento de Clientes</mat-toolbar>
+
+<mat-tab-group>
+   <mat-tab label= "Cadastrar" >
+    <mat-card class = "half-width"> 
+      
+    <form [formGroup]="formulario" (ngSubmit)="submit()"> 
+
+  <!-- Campo Nome -->
+      <div>
+
+          <!-- Campo - TextBox -->
+        <mat-form-field class="full-width">
+          <mat-label>Nome: </mat-label>
+          <input formControlName="nome" matInput placeholder="Digite seu nome" />
+        </mat-form-field>
+
+         <!-- Tratamento de erro, "se existe erro, mostra mensagem" -->
+        <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+          <div *ngIf="formulario.controls.nome.errors.required">
+            Campo nome é obrigatório
+          </div>
+        </div>
+
+      </div>
+
+  <!-- Campo CPF-->
+      <div>
+        <!-- Campo - TextBox -->
+        <mat-form-field class="full-width">
+          <mat-label>CPF: </mat-label>
+          <input maxlength="11" formControlName="cpf" matInput placeholder="Digite seu CPF" />
+        </mat-form-field>
+       
+        <!-- Tratamento de erro, "se existe erro, mostra mensagem" -->
+        <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+          <div *ngIf="formulario.controls.cpf.errors.required">
+            Campo CPF é obrigatório
+          </div>
+        </div>
+
+      </div>
+
+  <!-- Campo CNPJ -->
+      <div>
+        <!-- Campo - TextBox -->
+        <mat-form-field class="full-width">
+          <mat-label>CNPJ: </mat-label>
+          <input maxlength="14" formControlName="cnpj" matInput placeholder="Digite seu CNPJ" />
+        </mat-form-field>
+         
+        <!-- Tratamento de erro, "se existe erro, mostra mensagem" -->
+        <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+          <div *ngIf="formulario.controls.cnpj.errors.required">
+            Campo CNPJ é obrigatório
+          </div>
+        </div>
+
+      </div>        
+
+  <!-- Campo Telefone -->
+      <div>
+        <!-- Campo - TextBox -->
+        <mat-form-field class="full-width">
+          <mat-label>Telefone: </mat-label>
+          <input maxlength="11" formControlName="telefone" matInput placeholder="Digite seu Telefone" />
+        </mat-form-field>  
+         
+        <!-- Tratamento de erro, "se existe erro, mostra mensagem" -->
+        <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+          <div *ngIf="formulario.controls.telefone.errors.required">
+            Campo Telefone é obrigatório
+          </div>
+        </div>
+
+      </div>
+
+  <!-- Campo Endereço -->
+      <div>
+        <!-- Campo - TextBox -->
+        <mat-form-field class="full-width">
+          <mat-label>Endereço</mat-label>
+          <input formControlName="endereco" matInput placeholder="Digite seu Endereço"/>
+        </mat-form-field>  
+         
+        <!-- Tratamento de erro, "se existe erro, mostra mensagem" -->
+        <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+          <div *ngIf="formulario.controls.endereco.errors.required">
+            Campo Endereço é obrigatório
+          </div>
+        </div>
+      
+      </div>
+        
+  <!-- Botão-->
+      <div>
+      
+        <!-- Botão para adicionar Cliente ao Banco de dados-->
+        <button [disabled]="!formulario.valid" mat-raised-button color="primary">Adicionar</button>
+      
+      </div>
+
+      </form>
+    </mat-card>
+  </mat-tab>
+
+
+  <!-- Tabela dos Clientes usando Angular Material-->
+  <mat-tab label="Tudo">
+    <mat-card>
+      <table mat-table [dataSource]="clientes" class="full-width">
+
+        <!-- ID -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>ID</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.Id}} </td>
+        </ng-container>
+
+        <!-- Nome -->
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef>NOME</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.nome}} </td>
+        </ng-container>
+
+        <!-- CPF -->
+        <ng-container matColumnDef="cpf">
+          <th mat-header-cell *matHeaderCellDef>CPF</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.cpf}} </td>
+        </ng-container>
+
+        <!-- CNPJ-->
+        <ng-container matColumnDef="cnpj">
+          <th mat-header-cell *matHeaderCellDef>CNPJ</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.cnpj}} </td>
+        </ng-container>
+
+        <!-- TELEFONE-->
+        <ng-container matColumnDef="telefone">
+          <th mat-header-cell *matHeaderCellDef>TELEFONE</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.telefone}} </td>
+        </ng-container>
+
+        <!-- ENDERECO-->
+        <ng-container matColumnDef="endereco">
+          <th mat-header-cell *matHeaderCellDef>Endereço</th>
+          <td mat-cell *matCellDef="let clientes"> {{clientes.endereco}} </td>
+        </ng-container>
+
+        <!-- Posicionamento das colunas-->
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+
+
+      </table>
+    </mat-card>
+  </mat-tab>
+</mat-tab-group>  
